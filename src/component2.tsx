@@ -5,15 +5,11 @@ import { connect, Dispatch } from './context/connect';
 export const Component2: React.SFC<{name: string} & ReturnType<typeof mapStateToProps> & ReturnType<typeof mapActionsToProps>> = props => {
     console.log(`render ${props.name}`);
 
-    const updateClickCount = () => {
-        props.updateClickCount(props.clickCount + 1);
-    }
-
     return (
         <ul>
             <li>{props.name}</li>
             <li>{props.clickCount}</li>
-            <li><button onClick={updateClickCount}>Update</button></li>
+            <li><button onClick={props.incrementClickCount}>Update</button></li>
             {props.children != null ? <li>{props.children}</li> : null}
         </ul>
     );
@@ -27,12 +23,12 @@ const mapStateToProps = (state: State) => {
 
 const mapActionsToProps = (dispatch: Dispatch) => {
     return {
-        updateClickCount: (clickCount: number) => {
+        incrementClickCount: () => {
             dispatch(oldState => ({
                 ...oldState,
                 page2: {
                     ...oldState.page2,
-                    clickCount: clickCount
+                    clickCount: oldState.page2.clickCount + 1
                 }
             }))
         }
