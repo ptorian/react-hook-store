@@ -2,12 +2,13 @@ import React from 'react';
 import { State } from './context/appContext';
 import { connect, Dispatch } from './context/connect';
 
-export const Component1: React.SFC<{name: string} & ReturnType<typeof mapStateToProps> & ReturnType<typeof mapActionsToProps>> = props => {
-    console.log(`render ${props.name}`);
+export const Component1: React.SFC<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapActionsToProps>> = props => {
+    const name = Component1.displayName || Component1.name;
+    console.log(`render ${name}`);
 
     return (
         <ul>
-            <li>{props.name}</li>
+            <li>{name}</li>
             <li>{props.clickCount}</li>
             <li><button onClick={props.incrementClickCount}>Update</button></li>
             {props.children != null ? <li>{props.children}</li> : null}
@@ -35,4 +36,4 @@ const mapActionsToProps = (dispatch: Dispatch) => {
     }
 }
 
-export const ConnectedComponent1 = connect(mapStateToProps, mapActionsToProps)(Component1, "component 1");
+export const ConnectedComponent1 = connect(mapStateToProps, mapActionsToProps)(Component1);

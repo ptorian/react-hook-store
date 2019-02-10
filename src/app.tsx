@@ -7,10 +7,10 @@ export const App = () => {
     return (
         <ul>
             <li>
-                <ConnectedComponent1 name="Component 1" />
+                <ConnectedComponent1 />
             </li>
             <li>
-                <ConnectedComponent2 name="Component 2"></ConnectedComponent2>
+                <ConnectedComponent2></ConnectedComponent2>
             </li>
         </ul>
     );

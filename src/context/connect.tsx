@@ -8,27 +8,20 @@ export type Dispatch = (callback: (oldState: State) => State) => void;
 
 export const connect = <StateProps, ActionProps>(mapStateToProps: (state: State) => StateProps, mapActionsToProps: (dispatch: Dispatch) => ActionProps) => {
 
-    return (Component: any, name: string = "") => { 
+    return (Component: any) => { 
         const Connect = (props: any) =>  {
 
             const providerValue = useAppContext();
-
-            const ConnectedComponent = () => {
-                const appContext = useContext(AppContext);
-                console.log(`render connect ${name}`, appContext.state);
+            console.log(`render connect ${name}`, providerValue.state);
         
-                const dispatch: Dispatch = (callback: (oldState: State) => State) => {
-                    console.log("dispatch oldState", appContext.state);
-                    const newState = callback(appContext.state);
-                    appContext.updateState(newState);
-                }
-        
-                const stateAugmentedProps = mapStateToProps(appContext.state);
-                const actionAugmentedProps = mapActionsToProps(dispatch);
-                return (
-                    <Component {...props} {...stateAugmentedProps} {...actionAugmentedProps} />
-                )
+            const dispatch: Dispatch = (callback: (oldState: State) => State) => {
+                console.log("dispatch oldState", providerValue.state);
+                const newState = callback(providerValue.state);
+                providerValue.updateState(newState);
             }
+    
+            const stateAugmentedProps = mapStateToProps(providerValue.state);
+            const actionAugmentedProps = mapActionsToProps(dispatch);
 
             return (
                 /*
@@ -38,10 +31,11 @@ export const connect = <StateProps, ActionProps>(mapStateToProps: (state: State)
                     method, so the consumer is updated even when an ancestor component bails out of the update.
                 */
                 <AppContext.Provider value={providerValue}>
-                    <ConnectedComponent />
+                    <Component {...props} {...stateAugmentedProps} {...actionAugmentedProps} />
                 </AppContext.Provider>
             )
         };
+        Connect.displayName = `connect(${Component.displayName || Component.name})`;
         return Connect;
     }
 }
