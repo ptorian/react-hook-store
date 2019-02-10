@@ -1,28 +1,27 @@
 import React, { useState } from "react";
-import {AppContext} from "./appContext"
+import {AppContext, State} from "./appContext"
 
 
 export const AppContextProvider = ({children}) => {
-    console.log("render AppContextProvider");
 
-    const [page1ClickCount, setPage1ClickCount] = useState(0);
-    const [page2ClickCount, setPage2ClickCount] = useState(0);
-
-    const state = {
+    const [state, updateState] = useState<State>({
         page1: {
-            clickCount: page1ClickCount
+            clickCount: 0
         },
         page2: {
-            clickCount: page2ClickCount
+            clickCount: 0
+        }
+    });
+    
+    console.log("render AppContextProvider", state);
+
+    const providerValue = {
+        state: state, 
+        updateState: (newState: State) => {
+            console.log("Updating state from ", state, " to ", newState);
+            updateState(newState);
         }
     };
-
-    const actions = {
-        setPage1ClickCount,
-        setPage2ClickCount
-    };
-
-    const providerValue = {state, actions};
 
     return (
         /*

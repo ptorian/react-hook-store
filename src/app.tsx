@@ -1,6 +1,6 @@
 import React from 'react';
-import {Component1} from './component1';
-import { Component2 } from './component2';
+import {ConnectedComponent1} from './component1';
+import { ConnectedComponent2 } from './component2';
 import { AppContextProvider } from './context/appContextProvider';
 
 export const App = () => {
@@ -9,10 +9,10 @@ export const App = () => {
         <AppContextProvider>
             <ul>
                 <li>
-                    <Component1 name="Component 1" />
+                    <ConnectedComponent1 name="Component 1" />
                 </li>
                 <li>
-                    <Component2 name="Component 2"></Component2>
+                    <ConnectedComponent2 name="Component 2"></ConnectedComponent2>
                 </li>
             </ul>
         </AppContextProvider>
