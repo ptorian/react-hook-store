@@ -2,9 +2,11 @@ import React from 'react';
 import { State } from './context/appContext';
 import { connect, Dispatch } from './context/connect';
 
-type Component1Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapActionsToProps>;
+type StateProps = ReturnType<typeof mapStateToProps>;
+type ActionProps = ReturnType<typeof mapActionsToProps>;
+type ComponentProps = {};
 
-export const Component1: React.SFC<Component1Props> = props => {
+export const Component1: React.FunctionComponent<StateProps & ActionProps & ComponentProps> = props => {
     const name = Component1.displayName || Component1.name;
     console.log(`render ${name}`);
 
@@ -38,4 +40,4 @@ const mapActionsToProps = (dispatch: Dispatch) => {
     }
 }
 
-export const ConnectedComponent1 = connect(mapStateToProps, mapActionsToProps)(Component1);
+export const ConnectedComponent1 = connect<StateProps, ActionProps, ComponentProps>(mapStateToProps, mapActionsToProps)(Component1);

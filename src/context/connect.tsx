@@ -6,10 +6,10 @@ import { useAppContext } from "./appContextProvider";
 export type Dispatch = (callback: (oldState: State) => State) => void;
 
 
-export const connect = <StateProps, ActionProps>(mapStateToProps: (state: State) => StateProps, mapActionsToProps: (dispatch: Dispatch) => ActionProps) => {
+export const connect = <StateProps, ActionProps, ComponentProps>(mapStateToProps: (state: State) => StateProps, mapActionsToProps: (dispatch: Dispatch) => ActionProps) => {
 
-    return (Component: any) => { 
-        const Connect = (props: any) =>  {
+    return (Component: React.FunctionComponent<ComponentProps>): React.FunctionComponent<ComponentProps> => { 
+        const Connect = (props: ComponentProps) =>  {
 
             const providerValue = useAppContext();
             console.log(`render connect ${name}`, providerValue.state);

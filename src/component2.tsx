@@ -2,9 +2,11 @@ import React from 'react';
 import { State } from './context/appContext';
 import { connect, Dispatch } from './context/connect';
 
-type Component2Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapActionsToProps>;
+type StateProps = ReturnType<typeof mapStateToProps>;
+type ActionProps = ReturnType<typeof mapActionsToProps>;
+type ComponentProps = {};
 
-export const Component2: React.SFC<Component2Props> = props => {
+export const Component2: React.FunctionComponent<StateProps & ActionProps & ComponentProps> = props => {
     const name = Component2.displayName || Component2.name
     console.log(`render ${name}`);
 
