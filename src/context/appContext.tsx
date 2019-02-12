@@ -9,9 +9,6 @@ export interface State {
     }
 };
 
-export interface AppContextType {
-    state: State,
-    updateState: (state: State) => void
-}
+export type AppContextType = [State, (state: State) => void];
 
 export const AppContext = React.createContext<AppContextType>(null);

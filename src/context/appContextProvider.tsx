@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import {AppContext, State} from "./appContext"
+import {AppContext, State, AppContextType} from "./appContext"
 
 
-export const useAppContext = () => {
-
+export const useAppContext = (): AppContextType => {
     const [state, updateState] = useState<State>({
         page1: {
             clickCount: 0
@@ -15,13 +14,13 @@ export const useAppContext = () => {
     
     console.log("render AppContextProvider", state);
 
-    const providerValue = {
-        state: state, 
-        updateState: (newState: State) => {
+    const providerValue: AppContextType = [
+        state, 
+        (newState: State) => {
             console.log("updating state from ", state, " to ", newState);
             updateState(newState);
         }
-    };
+    ];
 
     return providerValue;
 };

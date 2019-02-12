@@ -12,18 +12,18 @@ export const connect = <StateProps, ActionProps, ComponentProps>(mapStateToProps
     return (Component: React.FunctionComponent<ComponentProps>): React.FunctionComponent<ComponentProps> => { 
         const Connect = (props: ComponentProps) =>  {
             const name = Component.displayName || Component.name;
-            const providerValue = useContext(AppContext);
-            state = providerValue.state;
-            
-            console.log(`render connect(${name})`, providerValue.state);
+            const [contextState, updateState] = useContext(AppContext);
+            state = contextState;
+
+            console.log(`render connect(${name})`, state);
         
             const dispatch: Dispatch = (callback: (oldState: State) => State) => {
-                console.log("dispatch oldState", providerValue.state);
+                console.log("dispatch oldState", state);
                 const newState = callback(state);
-                providerValue.updateState(newState);
+                updateState(newState);
             }
     
-            const stateAugmentedProps = mapStateToProps(providerValue.state);
+            const stateAugmentedProps = mapStateToProps(state);
             const actionAugmentedProps = mapActionsToProps(dispatch);
 
             return useMemo(() => (
