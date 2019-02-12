@@ -6,6 +6,9 @@ export interface State {
     },
     page2: {
         clickCount: number
+    },
+    page3: {
+        clickCount: number
     }
 };
 

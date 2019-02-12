@@ -6,8 +6,8 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 type ActionProps = ReturnType<typeof mapActionsToProps>;
 type ComponentProps = {};
 
-export const Component1: React.FunctionComponent<StateProps & ActionProps & ComponentProps> = props => {
-    const name = Component1.displayName || Component1.name;
+export const Component3: React.FunctionComponent<StateProps & ActionProps & ComponentProps> = props => {
+    const name = Component3.displayName || Component3.name
     console.log(`render ${name}`);
 
     let ulRef: HTMLUListElement;
@@ -42,22 +42,22 @@ export const Component1: React.FunctionComponent<StateProps & ActionProps & Comp
 
 const mapStateToProps = (state: State) => {
     return {
-        clickCount: state.page1.clickCount
+        clickCount: state.page3.clickCount
     }
 };
 
-const mapActionsToProps = (dispatch: Dispatch) => {
+const mapActionsToProps = (dispatch: Dispatch) => { 
     return {
         incrementClickCount: () => {
             dispatch(oldState => ({
                 ...oldState,
-                page1: {
-                    ...oldState.page1,
-                    clickCount: oldState.page1.clickCount + 1
+                page3: {
+                    ...oldState.page3,
+                    clickCount: oldState.page3.clickCount + 1
                 }
             }))
         }
     }
 }
 
-export const ConnectedComponent1 = connect<StateProps, ActionProps, ComponentProps>(mapStateToProps, mapActionsToProps)(Component1);
+export const ConnectedComponent3 = connect(mapStateToProps, mapActionsToProps)(Component3);

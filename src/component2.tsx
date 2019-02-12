@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { State } from './context/appContext';
 import { connect, Dispatch } from './context/connect';
+import { ConnectedComponent3 } from './component3';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type ActionProps = ReturnType<typeof mapActionsToProps>;
@@ -36,7 +37,7 @@ export const Component2: React.FunctionComponent<StateProps & ActionProps & Comp
             <li>{name}</li>
             <li>{props.clickCount}</li>
             <li><button onClick={props.incrementClickCount}>Update</button></li>
-            {props.children != null ? <li>{props.children}</li> : null}
+            <li><ConnectedComponent3 /></li>
         </ul>
     );
 };
