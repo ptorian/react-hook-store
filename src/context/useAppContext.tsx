@@ -9,6 +9,9 @@ export const useAppContext = (): AppContextType => {
         },
         page2: {
             clickCount: 0
+        },
+        page3: {
+            clickCount: 0
         }
     });
     

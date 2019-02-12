@@ -2,7 +2,7 @@ import React from 'react';
 import {ConnectedComponent1} from './component1';
 import { ConnectedComponent2 } from './component2';
 import { AppContext } from './context/appContext';
-import { useAppContext } from './context/appContextProvider';
+import { useAppContext } from './context/useAppContext';
 
 export const App = () => {
     console.log("render App");

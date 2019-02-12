@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from "react";
 
 import { State, AppContext } from "./appContext";
-import { useAppContext } from "./appContextProvider";
+import { useAppContext } from "./useAppContext";
 
 export type Dispatch = (callback: (oldState: State) => State) => void;
 
