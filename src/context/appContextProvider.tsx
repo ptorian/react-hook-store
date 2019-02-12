@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useDebugValue } from "react";
 import {AppContext, State, AppContextType} from "./appContext"
 
 
@@ -21,6 +21,8 @@ export const useAppContext = (): AppContextType => {
             updateState(newState);
         }
     ];
+
+    useDebugValue(providerValue);
 
     return providerValue;
 };
