@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { State } from './context/appContext';
 import { connect, Dispatch } from './context/connect';
 
@@ -10,8 +10,29 @@ export const Component2: React.FunctionComponent<StateProps & ActionProps & Comp
     const name = Component2.displayName || Component2.name
     console.log(`render ${name}`);
 
+    let ulRef: HTMLUListElement;
+
+    useEffect(() => {
+        let timerCountdown = 1;
+        let timerHandler = setInterval(() => {
+            ulRef.style.backgroundColor = `rgb(255, 0, 0, ${0 + timerCountdown * 0.5})`
+            timerCountdown -= 0.02;
+            if (timerCountdown < 0) {
+                clearInterval(timerHandler);
+                timerHandler = null;
+            }
+        }, 10);
+
+        return () => {
+            if (timerHandler != null) {
+                clearInterval(timerHandler);
+                timerHandler = null;
+            }
+        }
+    });
+
     return (
-        <ul>
+        <ul ref={x => ulRef = x}>
             <li>{name}</li>
             <li>{props.clickCount}</li>
             <li><button onClick={props.incrementClickCount}>Update</button></li>
